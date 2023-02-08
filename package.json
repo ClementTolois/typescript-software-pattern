@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
     "test": "jest --coverage"
   },
