@@ -1,26 +1,24 @@
 import Service from "./Service";
 
-class Service2 extends Service {
+class Service3 extends Service {
     constructor() {
-        super("Service2");
+        super("Service3");
     }
 
     async beforeMount(): Promise<void> {
-        this._postsub.once("pong", () => {
-            console.log("Pong received in Service2");
-        });
+        await this.wait(4000);
         super.beforeMount();
     }
 
     async mounted(): Promise<void> {
-        this._postsub.emit("ping");
+        await this.wait(5000);
         super.mounted();
     }
 
     async unmounted(): Promise<void> {
-        await this.wait(2000);
+        await this.wait(5000);
         super.unmounted();
     }
 }
 
-export default Service2;
+export default Service3;

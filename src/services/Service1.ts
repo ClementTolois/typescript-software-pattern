@@ -1,13 +1,8 @@
-import PostSub from "../core/PostSub";
-import ServiceLocator from "../core/ServiceLocator";
 import Service from "./Service";
 
 class Service1 extends Service {
-    private _postsub: PostSub;
-
     constructor() {
-        super();
-        this._postsub = ServiceLocator.getInstance().getService("PostSub");
+        super("Service1");
     }
 
     async beforeMount(): Promise<void> {
@@ -15,15 +10,17 @@ class Service1 extends Service {
             console.log("Ping received in Service1");
             this._postsub.emit("pong");
         });
+        super.beforeMount();
     }
 
     async mounted(): Promise<void> {
         await this.wait(1000);
+        super.mounted();
     }
     
     async unmounted(): Promise<void> {
         await this.wait(1000);
-        console.log("Unmounted in Service1");
+        super.unmounted();
     }
 }
 
