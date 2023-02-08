@@ -14,6 +14,9 @@ class ServiceLocator {
     }
 
     public registerService(name: string, service: any): void {
+        if (this._services.has(name)) {
+            throw new Error(`Service ${name} already registered`);
+        }
         this._services.set(name, service);
     }
 
@@ -24,6 +27,15 @@ class ServiceLocator {
         }
         return service;
     }
+
+    public removeService(name: string): void {
+        this._services.delete(name);
+    }
+
+    public removeAllServices(): void {
+        this._services.clear();
+    }
 }
+
 
 export default ServiceLocator;
